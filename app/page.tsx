@@ -1,11 +1,20 @@
 "use client"; // <-- Important for client components
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, CSSProperties } from 'react';
+
+interface Stream {
+  link: string;
+  streamID: string;
+  name: string;
+  status: string;
+  sourceStatus: string;
+  isActive: boolean;
+}
 
 export default function HomePage() {
 
   const [currentStream, setCurrentStream] = useState('');
-  const [statuses, setStatuses] = useState([{}]);
+  const [statuses, setStatuses] = useState<Stream[]>([]);
 
   const fetchStatuses = async () => {
     try {
@@ -17,7 +26,7 @@ export default function HomePage() {
     }
   };
 
-  const handleStreamSwitch = (link) => {
+  const handleStreamSwitch = (link: string) => {
     setCurrentStream(link);
   };
 
@@ -29,7 +38,7 @@ export default function HomePage() {
 
   return (
     <div style={styles.page}>
-      <h1 style={styles.heading}>Eric's AI Live Streams</h1>
+      <h1 style={styles.heading}>24/7 AI Live Streams</h1>
 
       {/* Responsive container for 16:9 video */}
       <div style={styles.videoContainer}>
@@ -79,7 +88,7 @@ export default function HomePage() {
   );
 }
 
-  const styles = {
+  const styles: { [key: string]: CSSProperties } = {
     page: {
       // Let’s take full viewport height, center everything
       minHeight: "50vh",
