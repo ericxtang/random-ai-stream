@@ -3,12 +3,12 @@
 import { useState, useEffect, CSSProperties } from 'react';
 
 interface Stream {
-  link: string;
-  streamID: string;
+  musicLink: string;
+  sourceLink: string;
+  sourceStreamID: string;
   name: string;
-  status: string;
-  sourceStatus: string;
-  isActive: boolean;
+  musicStreamStatus: string;
+  sourceStreamStatus: string;
 }
 
 export default function HomePage() {
@@ -27,6 +27,7 @@ export default function HomePage() {
   };
 
   const handleStreamSwitch = (link: string) => {
+    console.log(link);
     setCurrentStream(link);
   };
 
@@ -55,26 +56,30 @@ export default function HomePage() {
       <div style={styles.streamList}>
         {statuses.map((stream) => (
           <div key={stream["name"]} style={styles.streamItem}>
-            <button style={styles.streamButton} onClick={() => handleStreamSwitch(stream["link"])}>
-              {stream["name"]}
+            <div style={styles.streamTitle}>{stream["name"]}</div>
+
+            <button style={styles.streamButton} onClick={() => handleStreamSwitch(stream["musicLink"])}>
+              AI + Music
             </button>
             <span
               style={{
                 ...styles.status,
-                color: stream["status"] === 'Online' ? 'green' : 'red',
-                textAlign: 'center',
+                color: stream["musicStreamStatus"] === 'Online' ? 'green' : 'red',
               }}
             >
-              {stream["status"] || 'Checking...'}
+              {stream["musicStreamStatus"] || 'Checking...'}
             </span>
+
+            <button style={styles.streamButton} onClick={() => handleStreamSwitch(stream["sourceLink"])}>
+               AI Only
+            </button>
             <span
               style={{
                 ...styles.status,
-                color: stream["sourceStatus"] === 'Online' ? 'green' : 'red',
-                textAlign: 'center',
+                color: stream["sourceStreamStatus"] === 'Online' ? 'green' : 'red',
               }}
             >
-              Source {stream["sourceStatus"] || 'Checking...'}
+              {stream["sourceStreamStatus"] || 'Checking...'}
             </span>
           </div>
         ))}
@@ -145,6 +150,11 @@ export default function HomePage() {
       borderRadius: "4px",
       width: "150px",
     },
+    streamTitle: {
+      color: "#333",
+      fontWeight: "bold",
+      paddingBottom: "5px"
+    },
     streamButton: {
       padding: "0.5rem 1rem",
       fontSize: "1rem",
@@ -157,7 +167,9 @@ export default function HomePage() {
     status: {
       marginLeft: "1rem",
       fontSize: "0.9rem",
+      textAlign: 'center',
       color: "#666",
+      paddingBottom: "15px",
     },
     button: {
       marginTop: "1.5rem",
