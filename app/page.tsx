@@ -42,7 +42,26 @@ export default function HomePage() {
 
   return (
     <div style={styles.page}>
-      <h1 style={styles.heading}>24/7 AI Live Streams</h1>
+            {/* HEADER */}
+            <header style={styles.header}>
+        <h1 style={styles.heading}>24/7 AI Live Streams</h1>
+
+        {/* GITHUB LINK */}
+        <a
+          href="https://github.com/ericxtang/random-ai-stream"
+          style={styles.githubLink}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/github_logo.png"
+            alt="GitHub"
+            style={styles.githubIcon}
+          />
+        </a>
+      </header>
+
+      {/* <h1 style={styles.heading}>24/7 AI Live Streams<a href="https://github.com/ericxtang/random-ai-stream">(Github)</a></h1> */}
 
       {/* Responsive container for 16:9 video */}
       <div style={styles.videoContainer}>
@@ -103,14 +122,29 @@ export default function HomePage() {
       padding: "2rem",
       boxSizing: "border-box",
     },
+    header: {
+      position: "relative",
+      width: "100%",
+      marginBottom: "1rem",
+    },
     heading: {
-      margin: "1rem auto",
       textAlign: "center",
+      margin: 0,
       fontFamily: "sans-serif",
-      fontSize: "3rem",      // Bigger, more prominent font size
+      fontSize: "3rem",
       fontWeight: "bold",
       lineHeight: "1.2",
-      color: "#444", // Darker heading color
+      color: "#444",
+    },
+    githubLink: {
+      position: "absolute",
+      top: 0,
+      right: 0,
+      padding: "0.5rem",
+    },
+    githubIcon: {
+      width: "100px",
+      height: "auto",
     },
     videoContainer: {
       position: "relative",
