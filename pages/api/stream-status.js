@@ -8,9 +8,10 @@ export default async function handler(req, res) {
     {"musicLink": 'https://livepeercdn.studio/hls/f1c6i42ondt3jkbi/index.m3u8', "musicStreamID": "f1c6d706-03de-43f5-9da6-87f326b997af", "name": "New Years", "sourceStreamID": "b92250ed-9355-4f5d-b4d1-d5c29ab6af48", "sourceLink": "https://livepeercdn.studio/hls/b9222618fmombewp/index.m3u8"},
   ];
 
+  const token = process.env.LP_API_TOKEN;
   const options = {
     method: 'GET',
-    headers: { Authorization: 'Bearer 4425c9d9-15e4-48d2-900b-3a17d4fa4e21' },
+    headers: { Authorization: `Bearer ${token}` },
   };
 
   for (const stream of streamLinks) {
